@@ -1,17 +1,26 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+      <ul v-for="(item, i) in categories" :key="i">
+        <li>{{item.name}}</li>
+      </ul>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import $ from 'jquery'
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
+  title: 'cattledog-front',
+  name: 'app', 
+  data() {
+    return {
+      categories: []  
+    }
+  },
+  created: function() {
+    $.getJSON('/assets/categories.json')
+      .done( info =>  {
+        this.categories = info;
+    });
   }
 }
 </script>
