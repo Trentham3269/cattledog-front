@@ -17,7 +17,7 @@ export default {
     }
   },
   created: function() {
-    $.getJSON('/assets/categories.json')
+    $.getJSON('http://localhost:8888/categories')
       .done( info =>  {
         this.categories = info;
     });
