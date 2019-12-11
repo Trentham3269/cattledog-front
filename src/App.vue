@@ -1,37 +1,29 @@
 <template>
-  <div>
-      <ul v-for="(item, i) in categories" :key="i">
-        <li>{{item.name}}</li>
-      </ul>
+  <div id='app'>
+    <GetCategories :categories = 'categoryArray'/>
   </div>
 </template>
 
 <script>
 import $ from 'jquery'
+import GetCategories from './components/GetCategories.vue'
+
 export default {
   title: 'cattledog-front',
-  name: 'app', 
+  name: 'app',
+  components: {
+    'GetCategories': GetCategories
+  },
   data() {
     return {
-      categories: []  
+      categoryArray: []  
     }
   },
   created: function() {
     $.getJSON('http://localhost:8888/categories')
       .done( info =>  {
-        this.categories = info;
+        this.categoryArray = info;
     });
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
