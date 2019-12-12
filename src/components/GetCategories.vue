@@ -1,9 +1,33 @@
 <template>
-  <div>
-    <ul v-for="(item, i) in categories" :key="i">
-      <li>{{item.name}}</li>
-    </ul>
-  </div>
+  <v-container>
+    <v-layout
+      text-center
+      wrap
+    >
+      <v-flex xs12>
+        <v-card
+          class="mx-auto"
+          max-width="500"
+        >
+          <v-list>
+            <v-list-item-group>
+              <v-list-item
+                v-for="(item, i) in categories"
+                :key="i"
+              >
+                <v-list-item-icon>
+                  <v-icon v-text="item.icon"></v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title v-text="item.name"></v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-item-group>
+           </v-list>
+        </v-card>
+      </v-flex>	
+    </v-layout>
+  </v-container>  
 </template>
 
 <script>
