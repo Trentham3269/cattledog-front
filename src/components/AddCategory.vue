@@ -11,8 +11,8 @@
           lazy-validation
         >
           <v-text-field
+            v-model="category"
             :counter="50"
-            :rules="categoryRules"
             label="Add Category"
             required
           ></v-text-field>          
@@ -21,7 +21,7 @@
             :disabled="!valid"
             color="success"
             class="mr-4"
-            @click="submit"
+            @click="addCategory"
           >
             Submit
           </v-btn>      
@@ -33,22 +33,30 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     name: 'AddCategory',
     data: () => ({
       valid: true,
       name: '',
-      categoryRules: [
-        v => !!v || 'Category is required',
-        v => (v && v.length <= 50) || 'Category must be less than 50 characters',
-      ]
+      category: ''
+      // categoryRules: [
+      //   v => !!v || 'Category is required',
+      //   v => (v && v.length <= 50) || 'Category must be less than 50 characters',
+      // ]
     }),
-
     methods: {
-      submit () {
-        if (this.$refs.form.validate()) {
-          this.snackbar = true
-        }
+      addCategory() {
+        axios.
+          post('http://localhost:8888/categories', {name: this.category})
+          .then(function (response) {
+            // eslint-disable-next-line no-console
+            console.log(response);
+          })
+          .catch(function (error) {
+            // eslint-disable-next-line no-console
+            console.log(error);
+          });
       }
     }
   }
