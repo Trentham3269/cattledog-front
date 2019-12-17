@@ -1,7 +1,7 @@
 <template>
   <v-app>    
       <AddCategory/>  
-      <GetCategories :categories = 'categoryArray'/> 
+      <GetCategories/> 
   </v-app>
 </template> 
 
@@ -16,16 +16,6 @@
     components: {
       GetCategories,
       AddCategory
-    },
-    data() {
-      return {
-        categoryArray: []
-      }
-    },
-    created() {
-      this.$http
-        .get('/categories')
-        .then(response => (this.categoryArray = response.data))
     }
   }
 </script>

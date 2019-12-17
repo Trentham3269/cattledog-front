@@ -16,16 +16,18 @@
 <script>
   export default {
     name: 'AddCategory',
-    data: () => ({
-      state: 'default',
-      valid: true,
-      name: '',
-      category: ''
-      // categoryRules: [
-      //   v => !!v || 'Category is required',
-      //   v => (v && v.length <= 50) || 'Category must be less than 50 characters',
-      // ]
-    }),
+    data() {
+      return {
+        state: 'default',
+        valid: true,
+        name: '',
+        category: ''
+        // categoryRules: [
+        //   v => !!v || 'Category is required',
+        //   v => (v && v.length <= 50) || 'Category must be less than 50 characters',
+        // ]
+      }
+    },
     methods: {
       addCategory() {
         this.$http
