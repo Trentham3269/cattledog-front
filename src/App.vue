@@ -7,12 +7,6 @@
 
 <script>
 // Import dependencies  
-  import axios from 'axios';
-  const instance = axios.create({
-    baseURL: 'http://localhost:8888',
-    timeout: 1000,
-  });  
-
   // Import components
   import GetCategories from './components/GetCategories.vue';
   import AddCategory from './components/AddCategory.vue';  
@@ -30,7 +24,7 @@
       }
     },
     created() {
-      instance
+      this.$http
         .get('/categories')
         .then(response => (this.categoryArray = response.data))
     }

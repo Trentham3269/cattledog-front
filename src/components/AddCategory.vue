@@ -33,12 +33,6 @@
 </template>
 
 <script>
-  import axios from 'axios'
-  const instance = axios.create({
-    baseURL: 'http://localhost:8888',
-    timeout: 1000,
-  });
-
   export default {
     name: 'AddCategory',
     data: () => ({
@@ -52,8 +46,8 @@
     }),
     methods: {
       addCategory() {
-        instance.
-          post('/categories', {name: this.category})
+        this.$http
+          .post('/categories', {name: this.category})
           .then(function (response) {
             // eslint-disable-next-line no-console
             console.log(response);
