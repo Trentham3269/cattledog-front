@@ -1,31 +1,12 @@
 <template>
   <v-container>
-    <v-layout
-      text-center
-      wrap
-    >
+    <v-layout text-center wrap>
       <v-flex xs12>
-        <v-form
-          ref="form"
-          v-model="valid"
-          lazy-validation
-        >
-          <v-text-field
-            v-model="category"
-            :counter="50"
-            label="Add Category"
-            required
-          ></v-text-field>          
-
-          <v-btn
-            :disabled="!valid"
-            color="success"
-            class="mr-4"
-            @click="addCategory"
-          >
-            Submit
-          </v-btn>      
-
+        <v-btn v-if="state === 'default'" color="success" class="mr-4" @click="changeState('edit')">Add Item</v-btn>
+        <v-btn v-else color="error" class="mr-4" @click="changeState('default')">Cancel</v-btn>
+        <v-form v-if="state === 'edit'" ref="form" v-model="valid" lazy-validation>
+          <v-text-field v-model="category" :counter="50" label="Add Category" required></v-text-field>  
+          <v-btn :disabled="!valid" color="primary" class="mr-4" @click="addCategory()">Submit</v-btn>
         </v-form>
       </v-flex>
     </v-layout>
@@ -36,6 +17,7 @@
   export default {
     name: 'AddCategory',
     data: () => ({
+      state: 'default',
       valid: true,
       name: '',
       category: ''
@@ -56,6 +38,9 @@
             // eslint-disable-next-line no-console
             console.log(error);
           });
+      },
+      changeState(newState) {
+        this.state = newState;
       }
     }
   }

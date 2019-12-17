@@ -6,7 +6,6 @@
 </template> 
 
 <script>
-// Import dependencies  
   // Import components
   import GetCategories from './components/GetCategories.vue';
   import AddCategory from './components/AddCategory.vue';  
