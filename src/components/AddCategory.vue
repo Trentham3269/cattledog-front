@@ -21,7 +21,7 @@
         state: 'default',
         valid: true,
         name: '',
-        category: ''
+        category: '',
         // categoryRules: [
         //   v => !!v || 'Category is required',
         //   v => (v && v.length <= 50) || 'Category must be less than 50 characters',
@@ -32,10 +32,7 @@
       addCategory() {
         this.$http
           .post('/categories', {name: this.category})
-          .then(function (response) {
-            // eslint-disable-next-line no-console
-            console.log(response);
-          })
+          .then(response => (this.category = response.data))
           .catch(function (error) {
             // eslint-disable-next-line no-console
             console.log(error);
