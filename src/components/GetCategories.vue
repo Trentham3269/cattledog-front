@@ -2,7 +2,7 @@
   <v-container>
     <v-layout text-center wrap>
       <v-flex xs12>
-        <h1>{{header}}</h1>
+        <h2>{{header}}</h2>
         <v-card class="mx-auto" max-width="500">
           <v-list>
             <v-list-item-group>
@@ -28,7 +28,7 @@
     data() {
       return {
         categoryArray: [],
-        header: 'Categories - Last 10'
+        header: 'Categories - Last 10',
       }
     },
     mounted() {
