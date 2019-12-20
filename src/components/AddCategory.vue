@@ -30,9 +30,14 @@
     },
     methods: {
       addCategory() {
+        let self = this;
         this.$http
           .post('/categories', {name: this.category})
-          .then(response => (this.category = response.data))
+          .then(  function(){
+            // eslint-disable-next-line no-console
+            console.log('created new category');
+            self.$emit("categoryCreated");
+          })
           .catch(function (error) {
             // eslint-disable-next-line no-console
             console.log(error);

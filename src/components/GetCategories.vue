@@ -6,7 +6,7 @@
         <v-card class="mx-auto" max-width="500">
           <v-list>
             <v-list-item-group>
-              <v-list-item v-for="(item, i) in categoryArray" :key="i">
+              <v-list-item v-for="(item, i) in categories" :key="i">
                 <!-- <v-list-item-icon>
                   <v-icon v-text="item.icon"></v-icon>
                 </v-list-item-icon> -->
@@ -25,16 +25,11 @@
 <script>
   export default {
     name: 'GetCategories',
+    props:['categories'],
     data() {
       return {
-        categoryArray: [],
         header: 'Categories - Last 10',
       }
     },
-    mounted() {
-      this.$http
-        .get('/categories')
-        .then(response => (this.categoryArray = response.data))
-    }
   }
 </script>

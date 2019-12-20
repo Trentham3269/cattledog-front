@@ -26,8 +26,8 @@
           <v-app-bar-nav-icon @click.stop="drawer = !drawer"/>
           <v-toolbar-title>Application</v-toolbar-title>
         </v-app-bar>
-          <AddCategory/>  
-          <GetCategories/>
+          <AddCategory @categoryCreated="getData()"/>  
+          <GetCategories :categories="categoryArray" />
       </v-container> 
     </v-content>
   </v-app>
@@ -44,10 +44,21 @@
     components: {
       GetCategories,
       AddCategory
+    },
+    methods:{
+      getData(){
+        this.$http
+        .get('/categories')
+        .then(response => (this.categoryArray = response.data))  
+      }
+    },
+    mounted() {
+      this.getData();
     }, 
     data() {
       return {
         drawer: null,
+        categoryArray: [],
       }
     }
   }
