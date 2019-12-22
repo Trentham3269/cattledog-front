@@ -25,7 +25,7 @@
 <script>
   export default {
     name: 'GetCategories',
-    props:['categories'],
+    props: ['categories'],
     data() {
       return {
         header: 'Categories - Last 10',
