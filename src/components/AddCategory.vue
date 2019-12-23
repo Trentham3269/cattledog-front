@@ -31,8 +31,10 @@
       addCategory() {
         let self = this;
         this.$http
-          .post('/categories', {name: this.category})
-          .then(function(){
+          .post('/categories', {
+            name: this.category
+          })
+          .then(function() {
             // eslint-disable-next-line no-console
             console.log('created new category');
             self.category = '';

@@ -56,9 +56,12 @@
     },
     methods:{
       getData() {
+        let self = this;
         this.$http
         .get('/categories')
-        .then(response => (this.categoryArray = response.data))  
+        .then(function (response) {
+          self.categoryArray = response.data
+        })  
       }, 
       showCreateUser(newState) {
         this.createUserState = newState
