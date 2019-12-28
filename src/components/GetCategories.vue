@@ -2,23 +2,17 @@
   <v-container>
     <v-layout text-center wrap>
       <v-flex xs12>
-        <h2>{{header}}</h2>
-        <v-card class="mx-auto" max-width="500">
-          <v-list>
-            <v-list-item-group>
-              <v-list-item v-for="(item, i) in categories" :key="i">
-                <v-list-item-content>
-                  <v-list-item-title v-text="item.name" @click="getItems(item.id)"></v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
+        <v-expansion-panels>
+          <v-expansion-panel v-for="(item, i) in categories" :key="i">
+            <v-expansion-panel-header @click="getItems(item.id)">{{ item.name }}</v-expansion-panel-header>
+            <v-expansion-panel-content>
               <GetItems :items="itemsArray"/>
-            </v-list-item-group>
-           </v-list>
-        </v-card>
-        
-      </v-flex>	
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+      </v-flex>
     </v-layout>
-  </v-container>  
+  </v-container>
 </template>
 
 <script>
