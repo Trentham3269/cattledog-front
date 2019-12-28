@@ -35,7 +35,6 @@
           <CreateUser :createUserForm="createUserState"/>
           <AddCategory v-if="createUserState === 'default'" @categoryCreated="getData()"/>  
           <GetCategories v-if="createUserState === 'default'" :categories="categoryArray"/>
-          <GetItems/>
       </v-container> 
     </v-content>
   </v-app>
@@ -46,7 +45,6 @@
   import CreateUser from './components/CreateUser';
   import GetCategories from './components/GetCategories.vue';
   import AddCategory from './components/AddCategory.vue';
-  import GetItems from './components/GetItems.vue';
 
   export default {
     title: 'cattledog-front',
@@ -54,8 +52,7 @@
     components: {
       CreateUser,
       GetCategories,
-      AddCategory,
-      GetItems
+      AddCategory
     },
     methods:{
       getData() {
@@ -65,7 +62,7 @@
         .then(function (response) {
           self.categoryArray = response.data
         })  
-      }, 
+      },
       showCreateUser(newState) {
         this.createUserState = newState
         // eslint-disable-next-line no-console
@@ -79,7 +76,7 @@
       return {
         drawer: null,
         categoryArray: [],
-        createUserState: 'default', 
+        createUserState: 'default',
       }
     }
   }
