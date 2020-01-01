@@ -5,6 +5,7 @@
         <v-btn v-if="state === 'default'" color="success" class="mr-4" @click="changeState('edit')">Add Item</v-btn>
         <v-btn v-else color="error" class="mr-4" @click="changeState('default')">Cancel</v-btn>
         <v-form v-if="state === 'edit'" ref="form" v-model="valid" lazy-validation>
+          <h3>{{header}}</h3>
           <v-text-field v-model="category" :counter="50" label="Add Category" required></v-text-field>  
           <v-btn :disabled="!valid" color="primary" class="mr-4" @click="addCategory()">Submit</v-btn>
         </v-form>
@@ -18,9 +19,10 @@
     name: 'AddCategory',
     data() {
       return {
+        header: 'Add Category',
         state: 'default',
         valid: true,
-        name: '',
+        category: '',
         // categoryRules: [
         //   v => !!v || 'Category is required',
         //   v => (v && v.length <= 50) || 'Category must be less than 50 characters',
@@ -31,7 +33,7 @@
       addCategory() {
         let self = this;
         this.$http
-          .post('/categories', {
+          .post('/auth/categories', {
             name: this.category
           })
           .then(function() {

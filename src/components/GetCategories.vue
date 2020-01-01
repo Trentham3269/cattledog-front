@@ -34,9 +34,6 @@
         })
       }
     },
-    // mounted() {
-    //   this.getItems();
-    // },
     data() {
       return {
         header: 'Categories - Last 10',

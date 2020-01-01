@@ -2,13 +2,13 @@
   <v-container>
     <v-layout text-center wrap>
       <v-flex xs12>
-        <v-form v-if="createUserForm === 'edit'" ref="form" v-model="valid" :lazy-validation="lazy">
-          <h2>{{header}}</h2>
+        <v-form v-if="loginUserForm === 'edit'" ref="form" v-model="valid" :lazy-validation="lazy">
+          <h3 v-if="!user">{{ header }}</h3>
+          <h3 v-else>Welcome {{ user }}</h3>
           <v-text-field v-model="email" :counter="80" :rules="emailRules" label="E-mail" required></v-text-field>
           <v-text-field v-model="password" :counter="80" :rules="passwordRules" label="Choose password" required></v-text-field>
-          <v-checkbox v-model="checkbox" :rules="[v => !!v || 'You must agree to continue!']" label="I agree to your Terms & Conditions (even the fine print)" required></v-checkbox>
-          <v-btn color="primary" class="mr-4" @click="createUser()">Submit</v-btn>
-          <v-btn color="error" class="mr-4" @click="reset">Reset</v-btn>
+          <v-btn color="primary" class="mr-4" @click="loginUser()">Submit</v-btn>
+          <v-btn color="error" class="mr-4" @click="reset()">Reset</v-btn>
         </v-form>
       </v-flex> 
     </v-layout>
@@ -17,11 +17,11 @@
 
 <script>
   export default {
-    name: 'CreateUser',
-    props: ['createUserForm'],
+    name: 'LoginUser',
+    props: ['loginUserForm'],
     data() {
       return {
-        header: 'Sign Up',
+        header: 'Login',
         email: '', 
         emailRules: [
           v => !!v || 'E-mail is required',
@@ -34,23 +34,23 @@
         ], 
         checkbox: false, 
         lazy: false,
-        valid: true
+        valid: true,
+        user: ''
       }
     },
     methods: {
-      createUser() {
+      loginUser() {
         let self = this;
         this.$http
-          .post('/signup', {
+          .post('/login', {
             email: this.email,
             password: this.password 
           })
-          .then(function(){
-            // eslint-disable-next-line no-console
-            console.log('created new user');
+          .then(function(response){
+            // Return message from server
+            self.user = response.data.message;
             self.email = '';
             self.password = '';
-            //self.$emit("userCreated");
           })
           .catch(function(error) {
             // eslint-disable-next-line no-console

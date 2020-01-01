@@ -27,12 +27,17 @@
           <v-col>
             <v-toolbar-title>Application</v-toolbar-title>
           </v-col>
-          <v-col offset="9">
+          <v-col offset="8">
             <v-btn v-if="createUserState === 'default'" color="primary" @click="showCreateUser('edit')">Sign Up</v-btn>
             <v-btn v-else color="error" class="mr-4" @click="showCreateUser('default')">Cancel</v-btn>
           </v-col>
+          <v-col offset="">
+            <v-btn v-if="loginUserState === 'default'" color="warning" @click="showLoginUser('edit')">Sign In</v-btn>
+            <v-btn v-else color="error" class="mr-4" @click="showLoginUser('default')">Cancel</v-btn>
+          </v-col>
         </v-app-bar>
           <CreateUser :createUserForm="createUserState"/>
+          <LoginUser :loginUserForm="loginUserState"/>
           <AddCategory v-if="createUserState === 'default'" @categoryCreated="getData()"/>  
           <GetCategories v-if="createUserState === 'default'" :categories="categoryArray"/>
       </v-container> 
@@ -43,6 +48,7 @@
 <script>
   // Import components
   import CreateUser from './components/CreateUser';
+  import LoginUser from './components/LoginUser';
   import GetCategories from './components/GetCategories.vue';
   import AddCategory from './components/AddCategory.vue';
 
@@ -51,10 +57,11 @@
     name: 'app',
     components: {
       CreateUser,
+      LoginUser,
       GetCategories,
       AddCategory
     },
-    methods:{
+    methods: {
       getData() {
         let self = this;
         this.$http
@@ -65,8 +72,9 @@
       },
       showCreateUser(newState) {
         this.createUserState = newState
-        // eslint-disable-next-line no-console
-        console.log(newState);
+      },
+      showLoginUser(newState) {
+        this.loginUserState = newState
       }
     },
     mounted() {
@@ -76,7 +84,8 @@
       return {
         drawer: null,
         categoryArray: [],
-        createUserState: 'default',
+        createUserState: 'default', 
+        loginUserState: 'default'
       }
     }
   }
