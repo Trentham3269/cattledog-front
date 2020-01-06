@@ -29,11 +29,11 @@
             description: this.itemDesc
           })
           .then(function() {
-            // eslint-disable-next-line no-console
-            console.log('created new item');
             self.title = '';
             self.description = '';
             self.$emit("itemCreated");
+            // eslint-disable-next-line no-console
+            console.log('created new item');
           })
           .catch(function(error) {
             // eslint-disable-next-line no-console
