@@ -38,7 +38,7 @@
         </v-app-bar>
           <CreateUser :createUserForm="createUserState"/>
           <LoginUser :loginUserForm="loginUserState"/>
-          <AddCategory v-if="createUserState === 'default'" @categoryCreated="getData()"/>  
+          <AddItem v-if="createUserState === 'default'" @itemCreated="getData()"/>  
           <GetCategories v-if="createUserState === 'default'" :categories="categoryArray"/>
       </v-container> 
     </v-content>
@@ -50,7 +50,7 @@
   import CreateUser from './components/CreateUser';
   import LoginUser from './components/LoginUser';
   import GetCategories from './components/GetCategories.vue';
-  import AddCategory from './components/AddCategory.vue';
+  import AddItem from './components/AddItem.vue';
 
   export default {
     title: 'cattledog-front',
@@ -59,7 +59,7 @@
       CreateUser,
       LoginUser,
       GetCategories,
-      AddCategory
+      AddItem
     },
     methods: {
       getData() {
