@@ -6,7 +6,7 @@
         <v-btn v-else color="error" class="mr-4" @click="changeState('default')">Cancel</v-btn>
         <v-form v-if="state === 'edit'" ref="form" v-model="valid" lazy-validation>
           <h3>{{header}}</h3>
-          <v-select :items="items" v-model="itemCtgry" label="Select category" required></v-select>
+          <v-select :items="items" item-value="id" item-text="name" v-model="itemCtgry" label="Select category" required></v-select>
           <v-text-field v-model="itemTitle" :counter="50" label="Add item title" required></v-text-field>
           <v-text-field v-model="itemDesc" :counter="50" label="Add item description" required></v-text-field>  
           <v-btn :disabled="!valid" color="primary" class="mr-4" @click="addItem()">Submit</v-btn>
@@ -24,13 +24,14 @@
         let self = this;
         this.$http
           .post('/auth/items', {
-            category: this.itemCtgry,
+            catID: this.itemCtgry,
             title: this.itemTitle,
             description: this.itemDesc
           })
           .then(function() {
+            self.cat_id = '';
             self.title = '';
-            self.description = '';
+            self.description = '';  
             self.$emit("itemCreated");
             // eslint-disable-next-line no-console
             console.log('created new item');
@@ -49,7 +50,18 @@
         header: 'Add Item',
         state: 'default',
         valid: true,
-        items: ['Soccer', 'Basketball', 'Baseball', 'Frisbee', 'Snowboarding', 'Rock Climbing', 'Football', 'Surfing', 'Hockey', 'Fishing'],
+        items: [
+          {"id":10, "name":"Fishing"},
+          {"id":9, "name":"Hockey"},
+          {"id":8, "name":"Surfing"},
+          {"id":7, "name":"Football"},
+          {"id":6, "name":"Rock Climbing"},
+          {"id":5, "name":"Snowboarding"},
+          {"id":4, "name":"Frisbee"},
+          {"id":3, "name":"Baseball"},
+          {"id":2, "name":"Basketball"},
+          {"id":1, "name":"Soccer"}
+        ],
         itemCtgry: '',
         itemTitle: '',
         itemDesc: '', 
@@ -57,4 +69,6 @@
     }
   }
 </script>
+
+
 
