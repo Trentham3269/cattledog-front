@@ -43,25 +43,25 @@
       },
       changeState(newState) {
         this.state = newState;
+      },
+      getCategories() {
+        let self = this;
+        this.$http
+          .get('/categories')
+          .then(function(response) {
+            self.items = response.data
+        })  
       }
+    },
+    mounted() {
+      this.getCategories()
     },
     data() {
       return {
         header: 'Add Item',
         state: 'default',
-        valid: true,
-        items: [
-          {"id":10, "name":"Fishing"},
-          {"id":9, "name":"Hockey"},
-          {"id":8, "name":"Surfing"},
-          {"id":7, "name":"Football"},
-          {"id":6, "name":"Rock Climbing"},
-          {"id":5, "name":"Snowboarding"},
-          {"id":4, "name":"Frisbee"},
-          {"id":3, "name":"Baseball"},
-          {"id":2, "name":"Basketball"},
-          {"id":1, "name":"Soccer"}
-        ],
+        valid: true, 
+        items: [],
         itemCtgry: '',
         itemTitle: '',
         itemDesc: '', 

@@ -66,7 +66,7 @@
         let self = this;
         this.$http
         .get('/categories')
-        .then(function (response) {
+        .then(function(response) {
           self.categoryArray = response.data
         })  
       },
