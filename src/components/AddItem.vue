@@ -2,9 +2,9 @@
   <v-container>
     <v-layout text-center wrap>
       <v-flex xs12>
-        <v-btn v-if="state === 'default'" color="success" class="mr-4" @click="changeState('edit')">Add Item</v-btn>
+        <v-btn v-if="test === 'default'" color="success" class="mr-4" @click="changeState('edit')">Add Item</v-btn>
         <v-btn v-else color="error" class="mr-4" @click="changeState('default')">Cancel</v-btn>
-        <v-form v-if="state === 'edit'" ref="form" v-model="valid" lazy-validation>
+        <v-form v-if="test === 'edit'" ref="form" v-model="valid" lazy-validation>
           <h3>{{header}}</h3>
           <v-select :items="items" item-value="id" item-text="name" v-model="itemCtgry" label="Select category" required></v-select>
           <v-text-field v-model="itemTitle" :counter="50" label="Add item title" required></v-text-field>
@@ -42,7 +42,7 @@
           });
       },
       changeState(newState) {
-        this.state = newState;
+        this.test = newState;
       },
       getCategories() {
         let self = this;
@@ -59,7 +59,7 @@
     data() {
       return {
         header: 'Add Item',
-        state: 'default',
+        test: 'default',
         valid: true, 
         items: [],
         itemCtgry: '',

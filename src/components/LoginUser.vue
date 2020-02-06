@@ -3,8 +3,8 @@
     <v-layout text-center wrap>
       <v-flex xs12>
         <v-form v-if="loginUserForm === 'edit'" ref="form" v-model="valid" :lazy-validation="lazy">
-          <h3 v-if="!user">{{ header }}</h3>
-          <h3 v-else>Welcome {{ user }}</h3>
+          <h3>{{ header }}</h3>
+          <h3>Welcome {{ $store.getters.user }}</h3>
           <v-text-field v-model="email" :counter="80" :rules="emailRules" label="E-mail" required></v-text-field>
           <v-text-field v-model="password" :counter="80" :rules="passwordRules" label="Choose password" required></v-text-field>
           <v-btn color="primary" class="mr-4" @click="loginUser()">Submit</v-btn>
@@ -34,8 +34,7 @@
         ], 
         checkbox: false, 
         lazy: false,
-        valid: true,
-        user: ''
+        valid: true
       }
     },
     methods: {
@@ -47,8 +46,8 @@
             password: this.password 
           })
           .then(function(response){
-            // Return message from server
-            self.user = response.data.message;
+            let user = response.data.message
+            self.$store.commit('UPDATE_USER', user);
             self.email = '';
             self.password = '';
           })
